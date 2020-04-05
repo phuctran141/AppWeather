@@ -5,24 +5,32 @@ import admin.phuc141.com.appweathers.Util.AppConstance;
 import admin.phuc141.com.appweathers.base.BaseActivity;
 import admin.phuc141.com.appweathers.model.business.TempCurrent;
 import admin.phuc141.com.appweathers.model.request.WeatheSeachLocationForm;
+import admin.phuc141.com.appweathers.model.response.CurrentData.Weather;
 import admin.phuc141.com.appweathers.viewmodel.MainViewModel;
 
 import androidx.lifecycle.Observer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 public class MainActivity extends BaseActivity {
     MainViewModel mMainViewModel;
     EditText medtSeach;
+    List<Weather> weathers;
     TextView mtvNameCity, mtvCountry, mtvTemp, mtvState, mtvHumidity, mtvCloud, mtvWind, mtvDayTime;
     Button mbtnSeach, mbtnChangeAct;
     ImageView mimgStage;
@@ -31,7 +39,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -39,8 +46,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getLayoutRotateLoading() {
-//        return R.id.includedLayout;
-        return R.layout.layout_progress;
+        return R.id.includeActivity;
     }
 
     @Override
@@ -72,7 +78,6 @@ public class MainActivity extends BaseActivity {
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean){
                     showRotateLoading();
-                    Toast.makeText(MainActivity.this, "đang load dữ liệu", Toast.LENGTH_SHORT).show();
                 }
                 else hideRotateLoading();
             }
@@ -87,12 +92,35 @@ public class MainActivity extends BaseActivity {
         mMainViewModel.getWeatherLocationSuccess().observe(this, new Observer<TempCurrent>() {
             @Override
             public void onChanged(TempCurrent tempCurrent) {
-                Log.d("BBB", tempCurrent.toString());
+                String day = tempCurrent.getDt().toString();
+                String Status = tempCurrent.getWeather().get(0).getMain();
+                mtvState.setText(Status);
+                String Country = tempCurrent.getSys().getCountry();
+                mtvCountry.setText(Country);
+                String NameCity = tempCurrent.getName();
+                mtvNameCity.setText("Thành Phố: "+NameCity);
+                Log.d("BBB", tempCurrent.getDt().toString());
+                Long l = Long.valueOf(day);
+                Date date = new Date(l*1000L);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd HH:mm:ss");
+                String Date = simpleDateFormat.format(date);
+                mtvDayTime.setText(Date);
+                String icon = tempCurrent.getWeather().get(0).getIcon();
+                Picasso.get().load("https://openweathermap.org/img/w/"+icon+".png").resize(150,150).centerCrop().error(R.drawable.rain).into(mimgStage);
+                String nhietdo = tempCurrent.getMain().getTemp().toString();
+                Log.d("BBB",nhietdo);
+                Double a = Double.valueOf(nhietdo);
+                String Nhietdo = String.valueOf(a.intValue());
+                mtvTemp.setText(Nhietdo+ (char) 0x00B0+"C");
+                String Humidity = tempCurrent.getMain().getHumidity().toString();
+                mtvHumidity.setText(Humidity+"%");
+                String Cloud = tempCurrent.getClouds().getAll().toString();
+                mtvCloud.setText(Cloud+"%");
+                String speed = tempCurrent.getWind().getSpeed().toString();
+                mtvWind.setText(speed+"m/s");
             }
         });
-
     }
-
     @Override
     protected void listener() {
         mbtnSeach.setOnClickListener(new View.OnClickListener() {
@@ -100,12 +128,19 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 String diadiem = medtSeach.getText().toString();
                 if(!diadiem.isEmpty()){
-                    mMainViewModel.CallWeatherLocation(new WeatheSeachLocationForm(diadiem.replace(" ",""),AppConstance.UNITS,AppConstance.APPID));
+                    mMainViewModel.CallWeatherLocation(new WeatheSeachLocationForm(diadiem.replace(" ",""),AppConstance.UNITS,"",AppConstance.APPID));
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Vui lòng nhập thông tin", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+        mbtnChangeAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String location= medtSeach.getText().toString().replace(" ", "");
+                Intent intent = new Intent();
             }
         });
 
@@ -116,19 +151,5 @@ public class MainActivity extends BaseActivity {
         return MainActivity.this;
     }
 
-    @Override
-    protected ViewGroup getViewGroup() {
-        return findViewById(R.id.relaytiveLayout);
-    }
-
-//    @Override
-//    protected ViewGroup getViewGroup() {
-//        return relativeLayout;
-//    }
-//
-//    @Override
-//    protected Context getContext() {
-//        return MainActivity.this;
-//    }
 
 }

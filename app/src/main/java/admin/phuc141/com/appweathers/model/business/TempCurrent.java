@@ -1,14 +1,12 @@
 package admin.phuc141.com.appweathers.model.business;
 
 import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
-import admin.phuc141.com.appweathers.model.response.Clouds;
-import admin.phuc141.com.appweathers.model.response.Main;
-import admin.phuc141.com.appweathers.model.response.Sys;
-import admin.phuc141.com.appweathers.model.response.Weather;
-import admin.phuc141.com.appweathers.model.response.Wind;
+import admin.phuc141.com.appweathers.model.response.CurrentData.Clouds;
+import admin.phuc141.com.appweathers.model.response.CurrentData.Main;
+import admin.phuc141.com.appweathers.model.response.CurrentData.Sys;
+import admin.phuc141.com.appweathers.model.response.CurrentData.Weather;
+import admin.phuc141.com.appweathers.model.response.CurrentData.Wind;
 
 public class TempCurrent {
 private List<Weather> weather = null;

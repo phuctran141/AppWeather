@@ -1,4 +1,4 @@
-package admin.phuc141.com.appweathers.model.response;
+package admin.phuc141.com.appweathers.model.response.CurrentData;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

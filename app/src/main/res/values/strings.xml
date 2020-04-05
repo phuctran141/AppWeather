@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppWeathers</string>
+    <!-- main -->
+    <string name="nextDate">CÁC NGÀY TIẾP THEO</string>
 </resources>

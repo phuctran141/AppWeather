@@ -3,6 +3,7 @@ package admin.phuc141.com.appweathers.respository;
 import admin.phuc141.com.appweathers.api.ApiService;
 import admin.phuc141.com.appweathers.api.NetworkModule;
 import admin.phuc141.com.appweathers.model.business.TempCurrent;
+import admin.phuc141.com.appweathers.model.business.TempSevenDay;
 import admin.phuc141.com.appweathers.model.request.WeatheSeachLocationForm;
 import io.reactivex.Observable;
 
@@ -24,6 +25,15 @@ public class WeatherRespository {
         return apiService.getTempAtLocation(
                 weatheSeachLocationForm.getQ(),
                 weatheSeachLocationForm.getUnits(),
+                weatheSeachLocationForm.getCnt(),
                 weatheSeachLocationForm.getAppid());
     }
+    public Observable<TempSevenDay> getTempSevenDay(WeatheSeachLocationForm weatheSeachLocationForm){
+        return apiService.getTempSevenDay(
+                weatheSeachLocationForm.getQ(),
+                weatheSeachLocationForm.getUnits(),
+                weatheSeachLocationForm.getCnt(),
+                weatheSeachLocationForm.getAppid());
+    }
+
 }

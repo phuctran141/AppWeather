@@ -24,7 +24,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void observer();
     protected abstract void listener();
     protected abstract Context getContext();
-    protected abstract ViewGroup getViewGroup();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,23 +32,30 @@ public abstract class BaseActivity extends AppCompatActivity {
         mapview();
         observer();
         listener();
-        //relativeLayout = findViewById(R.id.relaytiveLayout);
+        if(getLayoutRotateLoading()>0){
+            layoutRotateLoading = findViewById(getLayoutRotateLoading());
+            rotateLoading= layoutRotateLoading.findViewById(R.id.rotateloading);
+            hideRotateLoading();
+        }
+
 //        layoutRotateLoading = LayoutInflater.from(getContext()).inflate(getLayoutRotateLoading(),getViewGroup(),false);
 //        frameLayout = layoutRotateLoading.findViewById(R.id.framelayout);
 //        rotateLoading =layoutRotateLoading.findViewById(R.id.rotateloading);
-//        hideRotateLoading();
+
     }
 
     public void showRotateLoading (){
-//        layoutRotateLoading.setVisibility(View.VISIBLE);
-//        relativeLayout.addView(layoutRotateLoading);
-//        getViewGroup().addView(layoutRotateLoading);
-//        frameLayout.setVisibility(View.VISIBLE);
-//        rotateLoading.start();
+        if(layoutRotateLoading!=null){
+            layoutRotateLoading.setVisibility(View.VISIBLE);
+            rotateLoading.start();
+        }
+
     }
     public void hideRotateLoading(){
-//        layoutRotateLoading.setVisibility(View.GONE);
-//        frameLayout.setVisibility(View.GONE);
-//        rotateLoading.stop();
+        if(layoutRotateLoading!=null){
+            layoutRotateLoading.setVisibility(View.GONE);
+            rotateLoading.stop();
+        }
+
     }
 }
