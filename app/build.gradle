@@ -46,4 +46,6 @@ dependencies {
     implementation 'com.victor:lib:1.0.4'
     // lib picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha02'
+
 }

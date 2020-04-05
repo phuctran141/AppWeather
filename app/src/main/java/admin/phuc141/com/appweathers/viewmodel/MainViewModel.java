@@ -67,7 +67,7 @@ public class MainViewModel extends ViewModel implements LifecycleObserver {
                 });
     }
     public LiveData<TempSevenDay> getTempSevenDaySuccess(){
-        return null;
+        return mWeatherSevenDay;
     }
     public void CallTempSevenDay(WeatheSeachLocationForm SevenDay){
         mLoading.setValue(true);
@@ -86,13 +86,10 @@ public class MainViewModel extends ViewModel implements LifecycleObserver {
             @Override
             public void onError(Throwable e) {
                 mError.setValue(e.getMessage());
-
             }
-
             @Override
             public void onComplete() {
                 mLoading.setValue(false);
-
             }
         });
     }

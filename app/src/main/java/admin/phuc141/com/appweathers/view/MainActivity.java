@@ -4,7 +4,10 @@ import admin.phuc141.com.appweathers.R;
 import admin.phuc141.com.appweathers.Util.AppConstance;
 import admin.phuc141.com.appweathers.base.BaseActivity;
 import admin.phuc141.com.appweathers.model.business.TempCurrent;
+import admin.phuc141.com.appweathers.model.business.WeatherAdapter;
+import admin.phuc141.com.appweathers.model.business.WeatherOfDay;
 import admin.phuc141.com.appweathers.model.request.WeatheSeachLocationForm;
+import admin.phuc141.com.appweathers.model.response.CurrentData.Main;
 import admin.phuc141.com.appweathers.model.response.CurrentData.Weather;
 import admin.phuc141.com.appweathers.viewmodel.MainViewModel;
 
@@ -24,13 +27,14 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
     MainViewModel mMainViewModel;
     EditText medtSeach;
-    List<Weather> weathers;
+
     TextView mtvNameCity, mtvCountry, mtvTemp, mtvState, mtvHumidity, mtvCloud, mtvWind, mtvDayTime;
     Button mbtnSeach, mbtnChangeAct;
     ImageView mimgStage;
@@ -69,6 +73,7 @@ public class MainActivity extends BaseActivity {
         mbtnChangeAct =findViewById(R.id.btnChangeAct);
         mimgStage =findViewById(R.id.imgState);
         getLifecycle().addObserver(mMainViewModel);
+
     }
 
     @Override
@@ -92,30 +97,38 @@ public class MainActivity extends BaseActivity {
         mMainViewModel.getWeatherLocationSuccess().observe(this, new Observer<TempCurrent>() {
             @Override
             public void onChanged(TempCurrent tempCurrent) {
-                String day = tempCurrent.getDt().toString();
+
                 String Status = tempCurrent.getWeather().get(0).getMain();
                 mtvState.setText(Status);
+
                 String Country = tempCurrent.getSys().getCountry();
                 mtvCountry.setText(Country);
+
                 String NameCity = tempCurrent.getName();
                 mtvNameCity.setText("Thành Phố: "+NameCity);
-                Log.d("BBB", tempCurrent.getDt().toString());
+
+                String day = tempCurrent.getDt().toString();
                 Long l = Long.valueOf(day);
                 Date date = new Date(l*1000L);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE yyyy-MM-dd HH:mm:ss");
                 String Date = simpleDateFormat.format(date);
                 mtvDayTime.setText(Date);
+
                 String icon = tempCurrent.getWeather().get(0).getIcon();
                 Picasso.get().load("https://openweathermap.org/img/w/"+icon+".png").resize(150,150).centerCrop().error(R.drawable.rain).into(mimgStage);
+
                 String nhietdo = tempCurrent.getMain().getTemp().toString();
                 Log.d("BBB",nhietdo);
                 Double a = Double.valueOf(nhietdo);
                 String Nhietdo = String.valueOf(a.intValue());
                 mtvTemp.setText(Nhietdo+ (char) 0x00B0+"C");
+
                 String Humidity = tempCurrent.getMain().getHumidity().toString();
                 mtvHumidity.setText(Humidity+"%");
+
                 String Cloud = tempCurrent.getClouds().getAll().toString();
                 mtvCloud.setText(Cloud+"%");
+
                 String speed = tempCurrent.getWind().getSpeed().toString();
                 mtvWind.setText(speed+"m/s");
             }
@@ -139,8 +152,13 @@ public class MainActivity extends BaseActivity {
         mbtnChangeAct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String location= medtSeach.getText().toString().replace(" ", "");
-                Intent intent = new Intent();
+                String city= medtSeach.getText().toString().replace(" ", "");
+                if(city.isEmpty()){
+                    city="saigon";
+                }
+                Intent intent = new Intent(MainActivity.this,SevenDayActivity.class);
+                intent.putExtra("name",city);
+                startActivity(intent);
             }
         });
 
@@ -151,5 +169,11 @@ public class MainActivity extends BaseActivity {
         return MainActivity.this;
     }
 
+    @Override
+    protected void getIntentData() {
+
+    }
+
 
 }
+

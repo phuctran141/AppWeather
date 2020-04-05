@@ -24,10 +24,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void observer();
     protected abstract void listener();
     protected abstract Context getContext();
+    protected abstract void getIntentData();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        getIntentData();
         init();
         mapview();
         observer();

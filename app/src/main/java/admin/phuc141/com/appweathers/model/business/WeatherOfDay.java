@@ -1,13 +1,13 @@
 package admin.phuc141.com.appweathers.model.business;
 
-public class Weather {
+public class WeatherOfDay {
 
     private String Date;
     private String Status;
-    private int ImageStage;
+    private String ImageStage;
     private String TempMax;
     private String TempMin;
-    public Weather(String date, String status, int imageStage, String tempMax, String tempMin) {
+    public WeatherOfDay(String date, String status, String imageStage, String tempMax, String tempMin) {
         Date = date;
         Status = status;
         ImageStage = imageStage;
@@ -31,11 +31,11 @@ public class Weather {
         Status = status;
     }
 
-    public int getImageStage() {
+    public String getImageStage() {
         return ImageStage;
     }
 
-    public void setImageStage(int imageStage) {
+    public void setImageStage(String imageStage) {
         ImageStage = imageStage;
     }
 

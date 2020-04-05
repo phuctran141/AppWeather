@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_marginTop="@dimen/dimen10"
+    android:layout_marginBottom="@dimen/dimen10"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:text="Ngày Tháng"
+            android:id="@+id/tvDate"
+            android:textSize="@dimen/text30"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:textSize="@dimen/text30"
+            android:id="@+id/tvStatus"
+            android:text="trạng thái"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_weight="1"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgState2"
+            android:layout_gravity="center"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:src="@drawable/cloud"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="75dp"/>
+        <TextView
+            android:id="@+id/tvTempMax"
+           android:gravity="center"
+            android:layout_weight="1"
+            android:text="30"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvTempMin"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="30"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
