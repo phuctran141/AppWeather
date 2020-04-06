@@ -4,57 +4,63 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import admin.phuc141.com.appweathers.model.response.SevenData.City;
-import admin.phuc141.com.appweathers.model.response.SevenData.List;
 
 public class TempSevenDay {
-    private City city;
 
-    private String cod;
+@SerializedName("city")
+@Expose
+private City city;
+@SerializedName("cod")
+@Expose
+private String cod;
+@SerializedName("message")
+@Expose
+private Double message;
+@SerializedName("cnt")
+@Expose
+private Integer cnt;
+@SerializedName("list")
+@Expose
+private java.util.List< admin.phuc141.com.appweathers.model.response.SevenData.List> list = null;
 
-    private Double message;
+public City getCity() {
+return city;
+}
 
-    private Integer cnt;
+public void setCity(City city) {
+this.city = city;
+}
 
-    private java.util.List<List> list = null;
+public String getCod() {
+return cod;
+}
 
-    public City getCity() {
-    return city;
-    }
+public void setCod(String cod) {
+this.cod = cod;
+}
 
-    public void setCity(City city) {
-    this.city = city;
-    }
+public Double getMessage() {
+return message;
+}
 
-    public String getCod() {
-    return cod;
-    }
+public void setMessage(Double message) {
+this.message = message;
+}
 
-    public void setCod(String cod) {
-    this.cod = cod;
-    }
+public Integer getCnt() {
+return cnt;
+}
 
-    public Double getMessage() {
-    return message;
-    }
+public void setCnt(Integer cnt) {
+this.cnt = cnt;
+}
 
-    public void setMessage(Double message) {
-    this.message = message;
-    }
+public java.util.List< admin.phuc141.com.appweathers.model.response.SevenData.List> getList() {
+return list;
+}
 
-    public Integer getCnt() {
-    return cnt;
-    }
-
-    public void setCnt(Integer cnt) {
-    this.cnt = cnt;
-    }
-
-    public java.util.List<List> getList() {
-    return list;
-    }
-
-    public void setList(java.util.List<List> list) {
-    this.list = list;
-    }
+public void setList(java.util.List< admin.phuc141.com.appweathers.model.response.SevenData.List> list) {
+this.list = list;
+}
 
 }

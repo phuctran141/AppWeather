@@ -17,7 +17,7 @@ public interface ApiService {
     @GET("forecast/daily")
     Observable<TempSevenDay> getTempSevenDay(@Query("q") String tencountry,
                                              @Query("units") String metric,
-                                             @Query("cnt") String number,
+                                             @Query("cnt") int number,
                                              @Query("appid") String id);
 
 }

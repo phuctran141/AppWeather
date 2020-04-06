@@ -28,12 +28,8 @@ public class WeatherRespository {
                 weatheSeachLocationForm.getCnt(),
                 weatheSeachLocationForm.getAppid());
     }
-    public Observable<TempSevenDay> getTempSevenDay(WeatheSeachLocationForm weatheSeachLocationForm){
-        return apiService.getTempSevenDay(
-                weatheSeachLocationForm.getQ(),
-                weatheSeachLocationForm.getUnits(),
-                weatheSeachLocationForm.getCnt(),
-                weatheSeachLocationForm.getAppid());
+    public Observable<TempSevenDay> getTempSevenDay(String NameCountry, String matrics, int NumberofDay, String Appid ){
+        return apiService.getTempSevenDay(NameCountry,matrics,NumberofDay,Appid);
     }
 
 }

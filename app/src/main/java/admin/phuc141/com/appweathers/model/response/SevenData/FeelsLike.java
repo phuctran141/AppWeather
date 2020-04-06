@@ -5,43 +5,49 @@ import com.google.gson.annotations.SerializedName;
 
 public class FeelsLike {
 
-    private Double day;
+@SerializedName("day")
+@Expose
+private Double day;
+@SerializedName("night")
+@Expose
+private Double night;
+@SerializedName("eve")
+@Expose
+private Double eve;
+@SerializedName("morn")
+@Expose
+private Double morn;
 
-    private Double night;
+public Double getDay() {
+return day;
+}
 
-    private Double eve;
+public void setDay(Double day) {
+this.day = day;
+}
 
-    private Double morn;
+public Double getNight() {
+return night;
+}
 
-    public Double getDay() {
-        return day;
-    }
+public void setNight(Double night) {
+this.night = night;
+}
 
-    public void setDay(Double day) {
-        this.day = day;
-    }
+public Double getEve() {
+return eve;
+}
 
-    public Double getNight() {
-        return night;
-    }
+public void setEve(Double eve) {
+this.eve = eve;
+}
 
-    public void setNight(Double night) {
-        this.night = night;
-    }
+public Double getMorn() {
+return morn;
+}
 
-    public Double getEve() {
-        return eve;
-    }
+public void setMorn(Double morn) {
+this.morn = morn;
+}
 
-    public void setEve(Double eve) {
-        this.eve = eve;
-    }
-
-    public Double getMorn() {
-        return morn;
-    }
-
-    public void setMorn(Double morn) {
-        this.morn = morn;
-    }
 }

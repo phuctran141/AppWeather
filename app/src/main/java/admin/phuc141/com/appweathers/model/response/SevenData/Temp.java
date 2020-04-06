@@ -5,64 +5,71 @@ import com.google.gson.annotations.SerializedName;
 
 public class Temp {
 
-    private Double day;
+@SerializedName("day")
+@Expose
+private Double day;
+@SerializedName("min")
+@Expose
+private Double min;
+@SerializedName("max")
+@Expose
+private Double max;
+@SerializedName("night")
+@Expose
+private Double night;
+@SerializedName("eve")
+@Expose
+private Double eve;
+@SerializedName("morn")
+@Expose
+private Double morn;
 
-    private Double min;
+public Double getDay() {
+return day;
+}
 
-    private Double max;
+public void setDay(Double day) {
+this.day = day;
+}
 
-    private Integer night;
+public Double getMin() {
+return min;
+}
 
-    private Double eve;
+public void setMin(Double min) {
+this.min = min;
+}
 
-    private Double morn;
+public Double getMax() {
+return max;
+}
 
-    public Double getDay() {
-    return day;
-    }
+public void setMax(Double max) {
+this.max = max;
+}
 
-    public void setDay(Double day) {
-    this.day = day;
-    }
+public Double getNight() {
+return night;
+}
 
-    public Double getMin() {
-    return min;
-    }
+public void setNight(Double night) {
+this.night = night;
+}
 
-    public void setMin(Double min) {
-    this.min = min;
-    }
+public Double getEve() {
+return eve;
+}
 
-    public Double getMax() {
-    return max;
-    }
+public void setEve(Double eve) {
+this.eve = eve;
+}
 
-    public void setMax(Double max) {
-    this.max = max;
-    }
+public Double getMorn() {
+return morn;
+}
 
-    public Integer getNight() {
-    return night;
-    }
-
-    public void setNight(Integer night) {
-    this.night = night;
-    }
-
-    public Double getEve() {
-    return eve;
-    }
-
-    public void setEve(Double eve) {
-    this.eve = eve;
-    }
-
-    public Double getMorn() {
-    return morn;
-    }
-
-    public void setMorn(Double morn) {
-    this.morn = morn;
-    }
+public void setMorn(Double morn) {
+this.morn = morn;
+}
 
 }

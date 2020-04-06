@@ -5,14 +5,23 @@ import com.google.gson.annotations.SerializedName;
 
 public class City {
 
+    @SerializedName("id")
+    @Expose
     private Integer id;
-
+    @SerializedName("name")
+    @Expose
     private String name;
-
+    @SerializedName("coord")
+    @Expose
+    private Coord coord;
+    @SerializedName("country")
+    @Expose
     private String country;
-
+    @SerializedName("population")
+    @Expose
     private Integer population;
-
+    @SerializedName("timezone")
+    @Expose
     private Integer timezone;
 
     public Integer getId() {
@@ -29,6 +38,14 @@ public class City {
 
     public void setName(String name) {
     this.name = name;
+    }
+
+    public Coord getCoord() {
+    return coord;
+    }
+
+    public void setCoord(Coord coord) {
+    this.coord = coord;
     }
 
     public String getCountry() {

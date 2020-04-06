@@ -1,10 +1,9 @@
 package admin.phuc141.com.appweathers.view;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import admin.phuc141.com.appweathers.model.business.TempSevenDay;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,10 +21,8 @@ import java.util.List;
 import admin.phuc141.com.appweathers.R;
 import admin.phuc141.com.appweathers.Util.AppConstance;
 import admin.phuc141.com.appweathers.base.BaseActivity;
-import admin.phuc141.com.appweathers.model.business.TempSevenDay;
 import admin.phuc141.com.appweathers.model.business.WeatherAdapter;
 import admin.phuc141.com.appweathers.model.business.WeatherOfDay;
-import admin.phuc141.com.appweathers.model.request.WeatheSeachLocationForm;
 import admin.phuc141.com.appweathers.model.response.SevenData.Temp;
 import admin.phuc141.com.appweathers.model.response.SevenData.Weather;
 import admin.phuc141.com.appweathers.viewmodel.MainViewModel;
@@ -79,38 +76,57 @@ public class SevenDayActivity extends BaseActivity {
 
     @Override
     protected void observer() {
-//        mMainViewModel.getTempSevenDaySuccess().observe(this, new Observer<TempSevenDay>() {
-//            @Override
-//            public void onChanged(TempSevenDay tempSevenDay) {
-//                String name =tempSevenDay.getCity().getName();
-//                Log.d("BBB", "thanh pho" + name);
-//                mNameCity.setText("Thành Phố "+ name);
-//                for(int i=0; i<tempSevenDay.getList().size();i++){
-//                    String Day = tempSevenDay.getList().get(i).getTemp().toString();
-//                    Long l = Long.valueOf(Day);
-//                    Date date= new Date(l*1000L);
-//                    SimpleDateFormat simpleDateFormat =new SimpleDateFormat("EEEE yyyy-MM-dd");
-//                    String Date = simpleDateFormat.format(date);
-//
-//                    Weather weather = (Weather) tempSevenDay.getList().get(i).getWeather().get(0);
-//                    String Status = weather.getDescription();
-//                    String icon = weather.getIcon();
-//
-//                    Temp temp = tempSevenDay.getList().get(i).getTemp();
-//
-//                    String tempmax=temp.getMax().toString();
-//                    Double a = Double.valueOf(tempmax);
-//                    String TempMax = String.valueOf( a.intValue());
-//
-//                    String tempmin = temp.getMin().toString();
-//                    Double b = Double.valueOf(tempmin);
-//                    String TempMin = String.valueOf(b.intValue());
-//
-//                    mWeatherArray.add(new WeatherOfDay(Date,Status,icon,TempMax,TempMin));
-//                }
-//                mWeatherAdapter.notifyDataSetChanged();
-//            }
-//        });
+        mMainViewModel.isLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    showRotateLoading();
+                }else {
+                    hideRotateLoading();
+                }
+            }
+        });
+        mMainViewModel.isError().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d("BBB","Lỗi rồi cha nội" + s);
+            }
+        });
+      mMainViewModel.getTempSevenDaySuccess().observe(this, new Observer<TempSevenDay>() {
+          @Override
+          public void onChanged(TempSevenDay tempSevenDay) {
+              Log.d("BBB",tempSevenDay.toString());
+                String name =tempSevenDay.getCity().getName();
+                Log.d("BBB", "thanh pho" + name);
+                mNameCity.setText("Thành Phố "+ name);
+                for(int i=1; i<tempSevenDay.getList().size();i++){
+                    String Day = tempSevenDay.getList().get(i).getDt().toString();
+                    Log.d("BBB",Day);
+                    Long l = Long.valueOf(Day);
+                    Date date= new Date(l*1000L);
+                    SimpleDateFormat simpleDateFormat =new SimpleDateFormat("EEEE yyyy-MM-dd");
+                    String Date = simpleDateFormat.format(date);
+
+
+                    Weather weather = (Weather) tempSevenDay.getList().get(i).getWeather().get(0);
+                    String Status = weather.getDescription();
+                    String icon = weather.getIcon();
+
+                    Temp temp = tempSevenDay.getList().get(i).getTemp();
+
+                    String tempmax=temp.getMax().toString();
+                    Double a = Double.valueOf(tempmax);
+                    String TempMax = String.valueOf( a.intValue());
+
+                    String tempmin = temp.getMin().toString();
+                    Double b = Double.valueOf(tempmin);
+                    String TempMin = String.valueOf(b.intValue());
+
+                    mWeatherArray.add(new WeatherOfDay(Date,Status,icon,TempMax,TempMin));
+              }
+                mWeatherAdapter.notifyDataSetChanged();
+          }
+      });
     }
 
     @Override
@@ -121,12 +137,14 @@ public class SevenDayActivity extends BaseActivity {
                 finish();
             }
         });
-//
-//        if (data.isEmpty()){
-//            Log.d("BBB", "toang");
-//        }else {
-//            mMainViewModel.CallTempSevenDay(new WeatheSeachLocationForm("saigon", AppConstance.UNITS,AppConstance.CNT,AppConstance.APPID));
-//        }
+        if (data.isEmpty()){
+            Log.d("BBB", "toang");
+        }else {
+            Log.d("BBB", "success");
+            Log.d("BBB", data);
+
+            mMainViewModel.CallTempSevenDay(data,AppConstance.UNITS,8,AppConstance.APPID);
+        }
 
     }
 

@@ -9,6 +9,7 @@ public class WeatheSeachLocationForm {
     public WeatheSeachLocationForm() {
     }
 
+
     public WeatheSeachLocationForm(String q, String units, String cnt, String appid) {
         this.q = q;
         this.units = units;
@@ -32,19 +33,19 @@ public class WeatheSeachLocationForm {
         this.units = units;
     }
 
-    public String getAppid() {
-        return appid;
-    }
-
-    public void setAppid(String appid) {
-        this.appid = appid;
-    }
-
     public String getCnt() {
         return cnt;
     }
 
     public void setCnt(String cnt) {
         this.cnt = cnt;
+    }
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public void setAppid(String appid) {
+        this.appid = appid;
     }
 }

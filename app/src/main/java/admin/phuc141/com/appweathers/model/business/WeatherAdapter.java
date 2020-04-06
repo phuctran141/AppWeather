@@ -38,8 +38,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         WeatherOfDay weatherOfDay = mweatherofdays.get(position);
         holder.Date.setText(weatherOfDay.getDate());
-        holder.TempMax.setText(weatherOfDay.getTempMax());
-        holder.TempMin.setText(weatherOfDay.getTempMin());
+        holder.TempMax.setText(weatherOfDay.getTempMax()+"°C");
+        holder.TempMin.setText(weatherOfDay.getTempMin()+"°C");
         holder.Status.setText(weatherOfDay.getStatus());
         Picasso.get().load("https://openweathermap.org/img/w/"+weatherOfDay.getImageStage()+".png").into(holder.imgWeather);
     }

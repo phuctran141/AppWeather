@@ -69,9 +69,9 @@ public class MainViewModel extends ViewModel implements LifecycleObserver {
     public LiveData<TempSevenDay> getTempSevenDaySuccess(){
         return mWeatherSevenDay;
     }
-    public void CallTempSevenDay(WeatheSeachLocationForm SevenDay){
+    public void CallTempSevenDay(String NameCountry, String matrics, int NumberofDay, String Appid){
         mLoading.setValue(true);
-        mweatherRespository.getTempSevenDay(SevenDay).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<TempSevenDay>() {
+        mweatherRespository.getTempSevenDay(NameCountry,matrics,NumberofDay,Appid).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<TempSevenDay>() {
             @Override
             public void onSubscribe(Disposable d) {
                 compositeDisposable.add(d);
