@@ -13,9 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.SevenDayActivity"></activity>
+        <activity android:name=".view.SevenDayActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+        </activity>
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

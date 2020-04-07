@@ -13,11 +13,14 @@ import admin.phuc141.com.appweathers.viewmodel.MainViewModel;
 
 import androidx.lifecycle.Observer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +40,7 @@ public class MainActivity extends BaseActivity {
     MainViewModel mMainViewModel;
     EditText medtSeach;
 
+    Integer TT=0;
     ScrollView mScrollView;
     LinearLayout mLayoutSadFace;
     TextView mtvNameCity, mtvCountry, mtvTemp, mtvState, mtvHumidity, mtvCloud, mtvWind, mtvDayTime;
@@ -47,6 +51,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         medtSeach.setText("saigon");
         showviewstart();
+
     }
 
     @Override
@@ -62,6 +67,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init() {
         mMainViewModel = new MainViewModel();
+
     }
 
     @Override
@@ -100,16 +106,21 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onChanged(String s) {
                 Log.d("BBB","Lỗi "+ s);
-                   hideRotateLoading();
-                   mLayoutSadFace.setVisibility(View.VISIBLE);
-                   mScrollView.setVisibility(View.GONE);
-                   Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                hideRotateLoading();
+              //  hideSoftKeyBoard(MainActivity.this);
+//                if(TT==1){
+//                    hideSoftKeyBoard(MainActivity.this);
+//                    TT=3;
+//                }
+                Log.d("BBB", "trạng thái = "+TT);
+                mLayoutSadFace.setVisibility(View.VISIBLE);
+                mScrollView.setVisibility(View.GONE);
             }
         });
         mMainViewModel.getWeatherLocationSuccess().observe(this, new Observer<TempCurrent>() {
             @Override
             public void onChanged(TempCurrent tempCurrent) {
-
+          //     hideSoftKeyBoard(MainActivity.this);
                 mLayoutSadFace.setVisibility(View.GONE);
                 mScrollView.setVisibility(View.VISIBLE);
 
@@ -119,7 +130,11 @@ public class MainActivity extends BaseActivity {
                 String Country = tempCurrent.getSys().getCountry().replace("VN","Việt Nam");
                 mtvCountry.setText("Quốc gia: "+Country);
 
-                String NameCity = tempCurrent.getName().replace("City","");
+                String NameCity = tempCurrent.getName()
+                        .replace("City","")
+                        .replace("Ho Chi Minh","Hồ Chí Minh")
+                        .replace("Turan","Đà Nẵng")
+                        .replace("Hanoi","Hà Nội");
                 mtvNameCity.setText("Thành Phố: "+NameCity);
 
                 String day = tempCurrent.getDt().toString();
@@ -154,6 +169,15 @@ public class MainActivity extends BaseActivity {
         mbtnSeach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                medtSeach.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if(!hasFocus){
+                            hideSoftKeyBoard(MainActivity.this);
+                        }
+                    }
+                });
+             //   hideSoftKeyBoard(MainActivity.this);
                 String diadiem = medtSeach.getText().toString();
                 if(!diadiem.isEmpty()){
                     mMainViewModel.CallWeatherLocation(new WeatheSeachLocationForm(diadiem.replace(" ",""),AppConstance.UNITS,"",AppConstance.APPID));
@@ -190,6 +214,12 @@ public class MainActivity extends BaseActivity {
     }
     public void showviewstart(){
         mMainViewModel.CallWeatherLocation(new WeatheSeachLocationForm("saigon",AppConstance.UNITS,"",AppConstance.APPID));
+    }
+    public void hideSoftKeyBoard(Activity activity){
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        if(inputMethodManager.isAcceptingText()){
+            inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
+        }
     }
 
 

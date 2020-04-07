@@ -97,7 +97,11 @@ public class SevenDayActivity extends BaseActivity {
           @Override
           public void onChanged(TempSevenDay tempSevenDay) {
               Log.d("BBB",tempSevenDay.toString());
-                String name =tempSevenDay.getCity().getName().replace("City","");
+                String name =tempSevenDay.getCity().getName()
+                        .replace("City","")
+                        .replace("Ho Chi Minh","Hồ Chí Minh")
+                        .replace("Turan","Đà Nẵng")
+                        .replace("Hanoi","Hà Nội");;
                 Log.d("BBB", "thanh pho" + name);
                 mNameCity.setText("Thành Phố "+ name);
                 for(int i=1; i<tempSevenDay.getList().size();i++){

@@ -24,6 +24,8 @@
             android:id="@+id/edtSeach"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
             android:layout_marginStart="@dimen/dimen5"
             android:layout_marginEnd="@dimen/dimen5"
             android:layout_weight="1"
@@ -42,7 +44,8 @@
             android:layout_marginEnd="@dimen/dimen5"
             android:background="@drawable/custom_button_green"
             android:text="OK"
-            android:textColor="@color/colorBlack"
+            android:textColor="#000739"
+            android:textStyle="bold"
             android:textSize="@dimen/text16" />
 
     </LinearLayout>
@@ -233,7 +236,7 @@
                     android:textColor="@color/colorBlack"/>
 
                 <Button
-                    android:background="@drawable/custom_button_green"
+                    android:background="@drawable/custom_button_orange"
                     android:id="@+id/btnChangeAct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
