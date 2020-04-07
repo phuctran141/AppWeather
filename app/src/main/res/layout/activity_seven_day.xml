@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@drawable/imgdesk"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.SevenDayActivity">
@@ -12,6 +13,8 @@
         android:id="@+id/includeActivity"/>
 
     <Toolbar
+        android:titleTextAppearance="@style/mystype"
+        android:titleTextColor="@color/colorWhite"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -19,8 +22,10 @@
         android:layout_marginTop="@dimen/dimen5"
         android:layout_marginBottom="@dimen/dimen5"
         android:id="@+id/tvNameCity2"
-        android:text="Hello"
-        android:textSize="@dimen/text30"
+        tools:text="Hello"
+        android:textSize="@dimen/text25"
+        android:textColor="@color/colorBlack"
+        android:textStyle="italic|bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

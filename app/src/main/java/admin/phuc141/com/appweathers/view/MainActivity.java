@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,12 +37,16 @@ public class MainActivity extends BaseActivity {
     MainViewModel mMainViewModel;
     EditText medtSeach;
 
+    ScrollView mScrollView;
+    LinearLayout mLayoutSadFace;
     TextView mtvNameCity, mtvCountry, mtvTemp, mtvState, mtvHumidity, mtvCloud, mtvWind, mtvDayTime;
     Button mbtnSeach, mbtnChangeAct;
     ImageView mimgStage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        medtSeach.setText("saigon");
+        showviewstart();
     }
 
     @Override
@@ -60,6 +66,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void mapview() {
+        mScrollView=findViewById(R.id.scrollViewLayout);
+        mLayoutSadFace=findViewById(R.id.layoutSadface);
         medtSeach =findViewById(R.id.edtSeach);
         mtvNameCity = findViewById(R.id.tvNameCity);
         mtvCountry = findViewById(R.id.tvCountry);
@@ -91,20 +99,27 @@ public class MainActivity extends BaseActivity {
         mMainViewModel.isError().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                Log.d("BBB","Lỗi "+ s);
+                   hideRotateLoading();
+                   mLayoutSadFace.setVisibility(View.VISIBLE);
+                   mScrollView.setVisibility(View.GONE);
+                   Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
             }
         });
         mMainViewModel.getWeatherLocationSuccess().observe(this, new Observer<TempCurrent>() {
             @Override
             public void onChanged(TempCurrent tempCurrent) {
 
+                mLayoutSadFace.setVisibility(View.GONE);
+                mScrollView.setVisibility(View.VISIBLE);
+
                 String Status = tempCurrent.getWeather().get(0).getMain();
                 mtvState.setText(Status);
 
-                String Country = tempCurrent.getSys().getCountry();
-                mtvCountry.setText(Country);
+                String Country = tempCurrent.getSys().getCountry().replace("VN","Việt Nam");
+                mtvCountry.setText("Quốc gia: "+Country);
 
-                String NameCity = tempCurrent.getName();
+                String NameCity = tempCurrent.getName().replace("City","");
                 mtvNameCity.setText("Thành Phố: "+NameCity);
 
                 String day = tempCurrent.getDt().toString();
@@ -172,6 +187,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void getIntentData() {
 
+    }
+    public void showviewstart(){
+        mMainViewModel.CallWeatherLocation(new WeatheSeachLocationForm("saigon",AppConstance.UNITS,"",AppConstance.APPID));
     }
 
 

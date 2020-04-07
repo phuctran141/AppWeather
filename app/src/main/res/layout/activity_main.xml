@@ -5,160 +5,246 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#4E6FF4"
+    android:background="@drawable/sky"
+    android:paddingLeft="@dimen/dimen10"
+    android:paddingRight="@dimen/dimen10"
     tools:context=".view.MainActivity">
 
         <include
             android:visibility="gone"
             layout="@layout/layout_progress"
             android:id="@+id/includeActivity"/>
-        <ScrollView
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dimen20"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtSeach"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dimen5"
+            android:layout_marginEnd="@dimen/dimen5"
+            android:layout_weight="1"
+            android:background="@drawable/custom_edt_search"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:hint="Search"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text16" />
+
+
+        <Button
+            android:id="@+id/btnseach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/dimen5"
+            android:background="@drawable/custom_button_green"
+            android:text="OK"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text16" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/layoutSadface"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/sad"
+            app:civ_border_color="#ff0"
+            app:civ_border_width="0dp"
+            app:civ_shadow="true"
+            app:civ_shadow_radius="10"
+            app:civ_shadow_color="#8BC34A"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/dimen10"
+            android:background="@drawable/custom_edt_search"
+            android:text="NO DATA"
+            android:textColor="#f20"
+            android:textSize="@dimen/text25"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-            <LinearLayout
-                android:layout_marginTop="@dimen/dimen10"
-                android:weightSum="5"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:layout_marginStart="@dimen/dimen5"
-                    android:layout_weight="4"
-                    android:id="@+id/edtSeach"
-                    android:hint="Seach"
-                    android:textSize="@dimen/text30"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp">
+                <TextView
+                    android:id="@+id/tvNameCity"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <Button
-                    android:id="@+id/btnseach"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen5"
+                    android:layout_marginTop="@dimen/dimen10"
                     android:layout_marginEnd="@dimen/dimen5"
-                    android:layout_weight="1"
-                    android:text="OK"
-                    android:textSize="@dimen/text30"
+                    tools:text="Tên thành phố: "
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text25"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/tvCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen5"
+                    android:layout_marginTop="@dimen/dimen10"
+                    android:layout_marginEnd="@dimen/dimen5"
+                    tools:text="Tên quốc gia: "
+                    android:textSize="@dimen/text25"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorBlack"/>
+
+                <ImageView
+
+                    android:background="@drawable/skyicon"
+                    android:id="@+id/imgState"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimen10" />
+
+                <TextView
+                    android:id="@+id/tvTemp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvNameCity"
-                android:layout_marginStart="@dimen/dimen5"
-                android:layout_marginEnd="@dimen/dimen5"
-                android:layout_marginTop="@dimen/dimen10"
-                android:text="Tên thành phố: "
-                android:textSize="@dimen/text30"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvCountry"
-                android:layout_marginStart="@dimen/dimen5"
-                android:layout_marginEnd="@dimen/dimen5"
-                android:layout_marginTop="@dimen/dimen10"
-                android:text="Tên quốc gia: "
-                android:textSize="@dimen/text30"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <ImageView
-                android:id="@+id/imgState"
-                android:layout_marginTop="@dimen/dimen10"
-                android:layout_gravity="center"
-                android:layout_width="150dp"
-                android:layout_height="150dp"/>
-            <TextView
-                android:id="@+id/tvTemp"
-                android:layout_marginTop="@dimen/dimen10"
-                android:text="Nhiệt độ"
-                android:textSize="@dimen/text30"
-                android:textColor="#f20"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvState"
-                android:layout_marginTop="@dimen/dimen10"
-                android:text="State"
-                android:textSize="@dimen/text30"
-                android:textColor="#FC0E0E0E"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <LinearLayout
-                android:layout_marginTop="@dimen/dimen10"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimen10"
+                    android:text="Nhiệt độ"
+                    android:textColor="#f20"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text25" />
+
+                <TextView
+                    android:id="@+id/tvState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimen10"
+                    android:text="State"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text25" />
+
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/rain"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"/>
-                    <TextView
-                        android:id="@+id/tvHumidity"
-                        android:textSize="@dimen/text30"
-                        tools:text="58%"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen10"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/cloud"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"/>
-                    <TextView
-                        android:id="@+id/tvCloud"
-                        android:textSize="@dimen/text30"
-                        tools:text="58%"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/rain" />
+
+                        <TextView
+                            android:id="@+id/tvHumidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text20"
+                            tools:text="58%"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/windmill2"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"/>
-                    <TextView
-                        android:id="@+id/tvWind"
-                        android:textSize="@dimen/text30"
-                        tools:text="40m/s"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/cloud" />
+
+                        <TextView
+                            android:id="@+id/tvCloud"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text20"
+                            tools:text="58%"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/windmill2" />
+
+                        <TextView
+                            android:id="@+id/tvWind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text20"
+                            tools:text="40m/s"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorBlack"/>
+                    </LinearLayout>
 
 
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvDayTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen20"
+                    android:gravity="center"
+                    tools:text="Thứ năm 19/5/2020 18:00:00"
+                    android:textSize="@dimen/text25"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/colorBlack"/>
+
+                <Button
+                    android:background="@drawable/custom_button_green"
+                    android:id="@+id/btnChangeAct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen20"
+                    android:layout_marginBottom="@dimen/text25"
+                    android:text="@string/nextDate"
+                    android:textSize="@dimen/text25"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"/>
             </LinearLayout>
-            <TextView
-                android:layout_marginTop="@dimen/dimen10"
-                android:id="@+id/tvDayTime"
-                android:hint="Thứ năm 19/5/2020 18:00:00"
-                android:textSize="@dimen/text30"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/btnChangeAct"
-                android:layout_marginTop="@dimen/dimen10"
-                android:layout_marginBottom="@dimen/text30"
-                android:text="@string/nextDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
             </LinearLayout>
-        </ScrollView>
+
+    </ScrollView>
 </LinearLayout>

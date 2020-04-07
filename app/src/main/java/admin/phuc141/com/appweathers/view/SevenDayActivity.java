@@ -89,6 +89,7 @@ public class SevenDayActivity extends BaseActivity {
         mMainViewModel.isError().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                finish();
                 Log.d("BBB","Lỗi rồi cha nội" + s);
             }
         });
@@ -96,7 +97,7 @@ public class SevenDayActivity extends BaseActivity {
           @Override
           public void onChanged(TempSevenDay tempSevenDay) {
               Log.d("BBB",tempSevenDay.toString());
-                String name =tempSevenDay.getCity().getName();
+                String name =tempSevenDay.getCity().getName().replace("City","");
                 Log.d("BBB", "thanh pho" + name);
                 mNameCity.setText("Thành Phố "+ name);
                 for(int i=1; i<tempSevenDay.getList().size();i++){
