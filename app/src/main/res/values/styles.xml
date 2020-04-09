@@ -11,4 +11,7 @@
         <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold|italic</item>
     </style>
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/colorWhite</item>
+    </style>
 </resources>

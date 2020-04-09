@@ -135,7 +135,7 @@ public class MainActivity extends BaseActivity {
                         .replace("Ho Chi Minh","Hồ Chí Minh")
                         .replace("Turan","Đà Nẵng")
                         .replace("Hanoi","Hà Nội");
-                mtvNameCity.setText("Thành Phố: "+NameCity);
+                mtvNameCity.setText("Thành phố: "+NameCity);
 
                 String day = tempCurrent.getDt().toString();
                 Long l = Long.valueOf(day);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppWeathers</string>
+    <string name="app_name">Weathers</string>
     <!-- main -->
     <string name="nextDate">CÁC NGÀY TIẾP THEO</string>
 </resources>

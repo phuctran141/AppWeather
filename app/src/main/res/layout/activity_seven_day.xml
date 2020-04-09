@@ -17,7 +17,8 @@
         android:titleTextColor="@color/colorWhite"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/ToolbarTheme"/>
     <TextView
         android:layout_marginTop="@dimen/dimen5"
         android:layout_marginBottom="@dimen/dimen5"
